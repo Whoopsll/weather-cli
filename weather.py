@@ -1,11 +1,9 @@
-from request import req
+from http_utils import req
 
 cityUrl = "https://geocoding-api.open-meteo.com/v1/search"
-
 cityTimeout = 10
 
 weatherUrl= "https://api.open-meteo.com/v1/forecast"
-weatherParams = {"latitude":0,"longitude":0,"current_weather":True}
 weatherTimeout = 10
 
 def get_coordinates(city):
