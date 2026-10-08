@@ -39,10 +39,3 @@ def get_weather(latitude, longitude):
         return None
     return result
 
-
-if __name__ == "__main__":
-
-    lat,lon= get_coordinates("beijing")
-    tem =  get_weather(lat,lon)    
-
-    print(f"Beijing当前温度:{tem}摄氏度")
