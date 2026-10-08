@@ -1,10 +1,10 @@
 from request import req
 
 cityUrl = "https://geocoding-api.open-meteo.com/v1/search"
-cityParams = {"name":"","count":1}
+
 cityTimeout = 10
 
-weatherUrl= "https://api.open-meteo.com/v1/forecas"
+weatherUrl= "https://api.open-meteo.com/v1/forecast"
 weatherParams = {"latitude":0,"longitude":0,"current_weather":True}
 weatherTimeout = 10
 
@@ -12,7 +12,7 @@ def get_coordinates(city):
     if not city:
         print("输入不可为空")
         return None
-    cityParams["name"] = city
+    cityParams = {"name":city,"count":1}
     resp = req(cityUrl,cityParams,cityTimeout)
     if resp is None:
         print("网络错误,请稍后重试")
@@ -28,8 +28,7 @@ def get_coordinates(city):
     return latitude,longitude
 
 def get_weather(latitude, longitude):
-    weatherParams["latitude"] = latitude
-    weatherParams["longitude"] = longitude
+    weatherParams = {"latitude":latitude,"longitude":longitude,"current_weather":True}
     resp = req(weatherUrl,weatherParams,weatherTimeout)
     if resp is None:
         print("网络错误,请稍后重试")
