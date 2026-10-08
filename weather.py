@@ -4,7 +4,7 @@ cityUrl = "https://geocoding-api.open-meteo.com/v1/search"
 cityParams = {"name":"","count":1}
 cityTimeout = 10
 
-weatherUrl= "https://api.open-meteo.com/v1/forecast"
+weatherUrl= "https://api.open-meteo.com/v1/forecas"
 weatherParams = {"latitude":0,"longitude":0,"current_weather":True}
 weatherTimeout = 10
 
@@ -14,7 +14,7 @@ def get_coordinates(city):
         return None
     cityParams["name"] = city
     resp = req(cityUrl,cityParams,cityTimeout)
-    if not resp:
+    if resp is None:
         print("网络错误,请稍后重试")
         return None
     data = resp.json()
@@ -31,7 +31,7 @@ def get_weather(latitude, longitude):
     weatherParams["latitude"] = latitude
     weatherParams["longitude"] = longitude
     resp = req(weatherUrl,weatherParams,weatherTimeout)
-    if not resp:
+    if resp is None:
         print("网络错误,请稍后重试")
         return None
     data = resp.json()
