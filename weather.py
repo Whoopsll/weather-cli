@@ -17,7 +17,10 @@ def get_coordinates(city):
         return None
     data = resp.json()
     try:
-        result = data["results"][0]
+        results = data["results"]
+        if not results:
+            return None
+        result = result[0]
     except KeyError:
         print("找不到该城市")
         return None
