@@ -1,5 +1,5 @@
-from weather import get_coordinates,get_weather,s
-from db import init_db,save_query
+from weather import get_coordinates,get_weather
+from db import init_db,save_query,get_history
 
 init_db()
  
@@ -9,7 +9,12 @@ while True:
         continue 
     if city[0] == "history":
         print("历史记录:")
-
+        history = get_history()
+        if not history:
+            print("暂无查询记录")
+            continue 
+        for history in get_history():
+            print(history)
     elif city[0] == "q":
         print("即将退出程序...")
         break
@@ -21,5 +26,5 @@ while True:
                 print(f"{city[0]}当前温度:{weather}°C")
                 if not save_query(city[0],weather):
                     print("系统故障,记录保存失败")
-                    break
+                    continue
                 print("查询已保存到历史记录中")
