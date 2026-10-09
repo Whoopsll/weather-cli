@@ -2,3 +2,6 @@
 __pycache__/
 todos.json
 notes.json
+
+practice*
+*.db
