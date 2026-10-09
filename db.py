@@ -19,9 +19,15 @@ def save_query(city,temp):
         return None
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    cur.execute("insert into queries(city,temp,queried_at) values(?,?,?)",(city,fTemp,datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
-    conn.commit()
-    conn.close()
+    try:
+        cur.execute("insert into queries(city,temp,queried_at) values(?,?,?)",(city,fTemp,datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+        conn.commit()
+        return True;
+    except sqlite3.Error as e:
+        conn.rollback();
+        return False
+    finally:
+        conn.close()
 
 def get_history(limit=10):
     """查询最新的limit条,最新的排最前"""
