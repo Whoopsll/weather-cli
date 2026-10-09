@@ -19,8 +19,9 @@ def get_coordinates(city):
     try:
         results = data["results"]
         if not results:
+            print("找不到该城市")
             return None
-        result = result[0]
+        result = results[0]
     except KeyError:
         print("找不到该城市")
         return None
