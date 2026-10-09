@@ -1,5 +1,5 @@
-from weather import get_coordinates,get_weather
-from db import init_db
+from weather import get_coordinates,get_weather,s
+from db import init_db,save_query
 
 init_db()
  
@@ -19,10 +19,7 @@ while True:
             weather = get_weather(coordinates[0],coordinates[1])
             if weather is not None:
                 print(f"{city[0]}当前温度:{weather}°C")
-
-
-# latlon = get_coordinates(city)
-# if latlon is not None:
-#     result = get_weather(latlon[0],latlon[1])
-#     if result is not None:
-#         print(f"{city}当前温度:{result}°C")
+                if not save_query(city[0],weather):
+                    print("系统故障,记录保存失败")
+                    break
+                print("查询已保存到历史记录中")
